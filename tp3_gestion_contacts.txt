@@ -1,0 +1,35 @@
+on a compris que 
+
+dt est le pas de temps
+la position correspond à la position initiale + la vitesse * dt
+la vitesse est augmentée à chaque tour par l'acceleration * dt
+L'acceleration correspond à la somme des forces divisée par la masse
+
+La somme des forces appliquées à un point correspond ici au poids + la force du ressort
+Poids = m * g
+
+valeurNominaleForce = k * (longueur - longueurInitiale)
+direction = (pos_b - pos_a) / norm(pos_b - pos_a)
+k = coefficient de résistance du ressort
+Force_ressort = valeurNominaleForce * direction
+on doit donc calculer et conserver la valeur initiale de la longueur d'un segment/ressort, puis à chaque pas de temps recalculer la longueur
+
+on constate une propagation numérique de la déformation due au ressort
+Il ne faut pas mettre un dt trop grand sinon la force explose
+
+fonction non linéaire prend dv en paramètre. Utilise un solveur pour résoudre l'équation.
+Prend plus de temps à résoudre mais plus stable
+
+choix du pas de temps influence peu sur le résultat
+peut augmenter constantes comme la raideur et reste stable
+
+pénalité : quand dépasse une limite (devrait y'avoir une collision), on applique une force qui repousse l'objet
+
+on peut le faire en explicite ou implicite
+
+pour l'explicite on fait un cas où c'est rigide
+on a calculé la masse du disque puis appliqué une force de gravité sur tous les points du maillage
+puis une fois qu'on détecte que l'objet a dépassé le plan on ajoute la force de pénalité FC += -k * distance_du_point_au_plan
+On intègre ça de façon explicite comme vu au premier tp
+
+On ajoute à ça un amortissement car rebondit à l'infini sinon : FC += -k * distance_point_au_plan - v * vitesse

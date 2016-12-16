@@ -1,0 +1,5 @@
+fonction non linéaire prend dv en paramètre. Utilise un solveur pour résoudre l'équation.
+Prend plus de temps à résoudre mais plus stable
+
+choix du pas de temps influence peu sur le résultat
+peut augmenter constantes comme la raideur et reste stable
